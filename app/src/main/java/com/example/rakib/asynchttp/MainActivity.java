@@ -7,7 +7,7 @@ import android.util.Log;
 import com.example.rakib.asynchttp.api.ApiClient;
 
 import com.example.rakib.asynchttp.api.WeatherApiServices;
-import com.example.rakib.asynchttp.model.London;
+import com.example.rakib.asynchttp.model.CityResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,16 +26,24 @@ public class MainActivity extends AppCompatActivity  {
 
         WeatherApiServices weatherApiServices= ApiClient.getClient().create(WeatherApiServices.class);
 
-        Call<London> londonCall=weatherApiServices.getWeatherDetails(API_KEY);
+        Call<CityResponse> londonCall=weatherApiServices.getWeatherDetails(API_KEY); //passing the paremeter value
 
-        londonCall.enqueue(new Callback<London>() {
+        londonCall.enqueue(new Callback<CityResponse>() {
+
+            //Auto created
             @Override
-            public void onResponse(Call<London> call, Response<London> response) {
+            public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
+
+                //Todo: On Success Taks should be right there
                 Log.d("Tareq", response.body().getCoord().getLon().toString());
+
             }
 
+            //auto Created
             @Override
-            public void onFailure(Call<London> call, Throwable t) {
+            public void onFailure(Call<CityResponse> call, Throwable t) {
+
+                //Todo: On failure Tasks
 
             }
         });

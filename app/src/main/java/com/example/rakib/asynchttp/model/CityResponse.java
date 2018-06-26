@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 @Generated("net.hexar.json2pojo")
 @SuppressWarnings("unused")
-public class London {
+public class CityResponse {
 
     @SerializedName("base")
     private String mBase;
@@ -97,68 +97,68 @@ public class London {
         private List<Weather> mWeather;
         private Wind mWind;
 
-        public London.Builder withBase(String base) {
+        public CityResponse.Builder withBase(String base) {
             mBase = base;
             return this;
         }
 
-        public London.Builder withClouds(Clouds clouds) {
+        public CityResponse.Builder withClouds(Clouds clouds) {
             mClouds = clouds;
             return this;
         }
 
-        public London.Builder withCod(Long cod) {
+        public CityResponse.Builder withCod(Long cod) {
             mCod = cod;
             return this;
         }
 
-        public London.Builder withCoord(Coord coord) {
+        public CityResponse.Builder withCoord(Coord coord) {
             mCoord = coord;
             return this;
         }
 
-        public London.Builder withDt(Long dt) {
+        public CityResponse.Builder withDt(Long dt) {
             mDt = dt;
             return this;
         }
 
-        public London.Builder withId(Long id) {
+        public CityResponse.Builder withId(Long id) {
             mId = id;
             return this;
         }
 
-        public London.Builder withMain(Main main) {
+        public CityResponse.Builder withMain(Main main) {
             mMain = main;
             return this;
         }
 
-        public London.Builder withName(String name) {
+        public CityResponse.Builder withName(String name) {
             mName = name;
             return this;
         }
 
-        public London.Builder withSys(Sys sys) {
+        public CityResponse.Builder withSys(Sys sys) {
             mSys = sys;
             return this;
         }
 
-        public London.Builder withVisibility(Long visibility) {
+        public CityResponse.Builder withVisibility(Long visibility) {
             mVisibility = visibility;
             return this;
         }
 
-        public London.Builder withWeather(List<Weather> weather) {
+        public CityResponse.Builder withWeather(List<Weather> weather) {
             mWeather = weather;
             return this;
         }
 
-        public London.Builder withWind(Wind wind) {
+        public CityResponse.Builder withWind(Wind wind) {
             mWind = wind;
             return this;
         }
 
-        public London build() {
-            London london = new London();
+        public CityResponse build() {
+            CityResponse london = new CityResponse();
             london.mBase = mBase;
             london.mClouds = mClouds;
             london.mCod = mCod;
