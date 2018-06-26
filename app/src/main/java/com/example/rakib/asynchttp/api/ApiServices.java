@@ -1,14 +1,14 @@
 package com.example.rakib.asynchttp.api;
 
-import com.example.rakib.asynchttp.model.London;
+import com.example.rakib.asynchttp.model.CategoryResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface WeatherApiServices {
-    @GET("/data/2.5/weather?id=2172797")
-    Call<London> getWeatherDetails(@Query("APPID") String apiKey);
+public interface ApiServices {
+    @GET("/api/v1/categories")
+    Call<CategoryResponse> getCategory();
 
     //region Hints for retrofit calls
 /*    So, using this route the retrofit will generate the following URL:

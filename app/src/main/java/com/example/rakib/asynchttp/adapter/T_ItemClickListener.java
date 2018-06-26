@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface T_ItemClickListener {
 
-    List<?> onClick(View view, int position, boolean isLongClick);
+    void onClick(View view, int position, boolean isLongClick);
 }
