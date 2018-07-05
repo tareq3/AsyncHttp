@@ -38,6 +38,7 @@ public class JsonDataFactory  {
     }
 
 
+    //this method converts the json data ito pojo list
     public static ArrayList<?> fromJson_To_Wishes_Model(JSONObject jsonObject){
 
         ArrayList<WishesDataModel> modelArrayList=new ArrayList<>();
@@ -51,6 +52,28 @@ public class JsonDataFactory  {
 
                 ));
             }
+
+            return modelArrayList;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+
+    //this method converts the json data ito pojo list
+    public static ArrayList<?> fromJson_To_Wishes_Model_Single(JSONObject jsonObject){
+
+        ArrayList<WishesDataModel> modelArrayList=new ArrayList<>();
+        try {
+
+                modelArrayList.add(new WishesDataModel(
+                        jsonObject.getInt("w_id"),
+                        jsonObject.getString("heading")
+
+                ));
+
 
             return modelArrayList;
         } catch (JSONException e) {

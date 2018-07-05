@@ -17,7 +17,10 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity implements JsonHttpTaskCompleteListener {
 
     JsonHttpTask mJsonHttptask;
+
     HashMap<String, Object> params=new HashMap<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +28,15 @@ public class MainActivity extends AppCompatActivity implements JsonHttpTaskCompl
 
     mJsonHttptask=new JsonHttpTask(this);
 
-    //mJsonHttptask.executeJsonHttpResponse("categories",params);
-    mJsonHttptask.executeJsonHttpResponse("wishes/4",params);
+
+        // mJsonHttptask.executeJsonHttpResponse("categories",params);
+
+  //  mJsonHttptask.executeJsonHttpResponse("wishes/4",params);
+
+
+    params.put("w_id",4);
+        mJsonHttptask.executeJsonHttpResponse("wish",params);
+
 
 
     }
