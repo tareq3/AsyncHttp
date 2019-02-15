@@ -3,39 +3,19 @@ package com.example.rakib.asynchttp;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.ContextMenu;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.rakib.asynchttp.adapter.ListItemAdapter;
-import com.example.rakib.asynchttp.api.ApiClient;
 
-import com.example.rakib.asynchttp.api.ApiServices;
-import com.example.rakib.asynchttp.model.Category;
-import com.example.rakib.asynchttp.model.CategoryResponse;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, ListItemAdapter.ItemClickListener {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, ListItemAdapter.ItemClickListener, MainActivity_RecyclerFragment.OnDataSetChangedListener {
 
     //Todo: Store the Api key right here
     private final static String API_KEY = "7546c1b03b96db7a7aad6f3e05e9ee81";
 
-    RecyclerView mRecyclerView;
-    RecyclerView.LayoutManager mLayoutManager;
-
-    ListItemAdapter listItemAdapter;
-
-    List<Category> categoryResponseList = new ArrayList<>();
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -55,47 +35,21 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
-        mRecyclerView = findViewById(R.id.list_Recycler);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
 
-        listItemAdapter = new ListItemAdapter(MainActivity.this, categoryResponseList, this); //if we don't need to use listener can use null instead of this
-
-        mRecyclerView.setAdapter(listItemAdapter);
-
-        loadData();
+        initRecyclerViewFragment(savedInstanceState);
 
 
     }
 
-    /*for loading data using retrofit*/
-    private void loadData() {
-        ApiServices apiServices = ApiClient.getClient().create(ApiServices.class);
+    MainActivity_RecyclerFragment fragmentInstance;
 
-        Call<CategoryResponse> call = apiServices.getCategory();
-
-        call.enqueue(new Callback<CategoryResponse>() {
-
-
-            @Override
-            public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
-                categoryResponseList = response.body().getCategory();
-                Log.d("Tareq", "Number of Categories" + categoryResponseList.size());
-
-                listItemAdapter.updateAdapter((ArrayList<Category>) categoryResponseList);
-
-
-                listItemAdapter.notifyDataSetChanged();
-                // stopping swipe refresh
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-
-            @Override
-            public void onFailure(Call<CategoryResponse> call, Throwable t) {
-
-            }
-        });
+    private void initRecyclerViewFragment(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            fragmentInstance = MainActivity_RecyclerFragment.newInstance();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.activity_main_recyclerview_container, fragmentInstance)
+                    .commitNow();
+        }
     }
 
 
@@ -114,7 +68,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public void onRefresh() {
 
         Toast.makeText(this, "Refresh", Toast.LENGTH_SHORT).show();
-        loadData();
+
+        /*Calling a fragment method in activity don't use interface for this reason*/
+        fragmentInstance.loadData();
     }
 
     /*On Item click*/
@@ -122,4 +78,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public void onClick(View view, int position, boolean isLongClick) {
         Toast.makeText(this, "pos: " + position, Toast.LENGTH_SHORT).show();
     }
+
+    /*On Recycler view updated*/
+    @Override
+    public void onDataUpdate(boolean completed) {
+        Toast.makeText(this, "Called", Toast.LENGTH_SHORT).show();
+        if (completed) mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+
 }

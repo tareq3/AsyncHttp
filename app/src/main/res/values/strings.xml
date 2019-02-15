@@ -3,4 +3,7 @@
     <string name="api">https://gist.githubusercontent.com/filippella/a728a34822a3bc7add98e477a4057b69/raw/310d712e87941f569074a63fedb675d2b611342a/cakes</string>
 
     <string name="WeatherApiKey">7546c1b03b96db7a7aad6f3e05e9ee81</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
